@@ -6,7 +6,7 @@
 using namespace std;
 
 namespace Metricas{
-    long long comparisons = 0;
+    long long comparacoes = 0;
     long long trocas = 0;
     chrono::time_point<chrono::high_resolution_clock> startTime;
 
@@ -21,7 +21,7 @@ namespace Metricas{
     }
 
     void resetMetricas(){
-        comparisons = 0;
+        comparacoes = 0;
         trocas = 0;
     }
     void printArray(const vector<int>& arr){
@@ -38,35 +38,39 @@ namespace Metricas{
         }
         return true; // Se não encontrou nenhum elemento fora de ordem, está ordenado
     }
+    void printMetricas() {
+        cout << "Comparações: " << comparacoes << endl;
+        cout << "Trocas: " << trocas << endl;
+    }
+
+    static long long Metricas::getComparacoes() {
+        return comparacoes;
+    }
+
+    static long long Metricas::getTrocas() {
+        return trocas;
+    }
 }
 
 namespace ArrayGen{
-    vector<int> gerarArrayAleatorio(int tamanho, int min, int max){
+    vector<int> gerarArrayAleatorio(int tamanho){
         vector<int> arr(tamanho);
         random_device rd;
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(min, max);
-        // Preenche o vetor com valores aleatórios dentro do intervalo [min, max]
-         // Utiliza o gerador de números aleatórios para preencher o vetor
-        for(int i = 0; i <tamanho; ++i){
+        uniform_int_distribution<> dis(0, tamanho - 1);
+        for(int i = 0; i < tamanho; ++i){
             arr[i] = dis(gen); 
         }
         return arr;
     }
-
-    vector<int> gerarArrayOrdenado(int tamanho, int min, int max) {
-        vector<int> arr(tamanho);
-        // Gera valores sequenciais dentro do intervalo [min, max]
-        int step = (max - min) / std::max(1, tamanho - 1);
-        for(int i = 0; i < tamanho; ++i) {
-            arr[i] = min + (i * step);
-            if(arr[i] > max) arr[i] = max;  // Garante que não ultrapasse o máximo
-        }
-        return arr;  // Adicionado o return que faltava
+    std::vector<int> gerarArrayOrdenado(int tamanho) {
+        std::vector<int> arr(tamanho);
+        std::iota(arr.begin(), arr.end(), 0); // Fills with 0, 1, 2, ...
+        return arr;
     }
 
-    vector<int> gerarArrayParcialmenteOrdenado(int tamanho, int numTrocas, int min, int max){
-        vector<int> arr = gerarArrayOrdenado(tamanho, min, max);
+    vector<int> gerarArrayParcialmenteOrdenado(int tamanho, int numTrocas){
+        vector<int> arr = gerarArrayOrdenado(tamanho);
         random_device rd;
         mt19937 gen(rd());
         //Realiza um numero limitado de trocar, para "desordenar" o array de forma controlada
@@ -81,8 +85,8 @@ namespace ArrayGen{
         return arr;
     }
 
-    vector<int> gerarArrayOrdenadoReverso(int tamanho, int min, int max) {
-        vector<int> arr = gerarArrayOrdenado(tamanho, min, max);
+    vector<int> gerarArrayOrdenadoReverso(int tamanho) {
+        vector<int> arr = gerarArrayOrdenado(tamanho);
         reverse(arr.begin(), arr.end());
         return arr;
     }

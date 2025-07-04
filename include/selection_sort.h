@@ -1,5 +1,4 @@
 #pragma once
 #include <vector>
-using namespace std;
 
-void selection_sort(vector<int>& arr);
+void selection_sort(std::vector<int>& arr);

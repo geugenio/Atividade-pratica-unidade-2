@@ -1,10 +1,10 @@
 #include "bubble_sort.h"
 #include "utils.h"
-void bubbleSort(vector<int>& arr) {
-    int n = arr.size();
 
-    Metricas::resetMetricas(); // Reseta as métricas de comparações e trocas
-    Metricas::startTimer(); // Inicia o cronômetro para medir o tempo de
+using namespace std;
+
+void bubble_sort(vector<int>& arr) {
+    int n = arr.size();
 
     for (int i = 0; i < n-1; i++){
         bool trocas = false;

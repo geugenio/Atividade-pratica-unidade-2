@@ -1,5 +1,5 @@
 #pragma once
 #include <vector>
-using namespace std;
 
-void bubble_sort(vector<int>& arr);
+
+void bubble_sort(std::vector<int>& arr);

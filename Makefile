@@ -1,27 +1,37 @@
-# Makefile 
-CC       := gcc
-CXX      := g++
-CFLAGS   := -Iinclude_c -std=c11 -Wall
-CXXFLAGS := -Iinclude_cpp -std=c++17 -Wall
+# Compilador
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude
 
-# Make expande os arquivos .c e .cpp
-SRCS   := $(wildcard src/*.cpp)
-.PHONY: all clean test
+# Diretórios
+SRC_DIR = src
+INCLUDE_DIR = include
+TEST_DIR = test
+BUILD_DIR = build
+BIN = main
 
-all: test
+# Arquivos
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
+TEST = $(TEST_DIR)/main.cpp
 
-ifeq ($(OS),Windows_NT)
-    RM = del /Q
-	EXE_EXT = .exe
-else
-    RM = rm -f
-	EXE_EXT =
-endif
+# Regra padrão
+all: $(BIN)
 
+# Compila o executável
+$(BIN): $(OBJS) $(TEST)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-test:
-	$(CXX) $(CXXFLAGS) $(SRCS_CPP) test/main.cpp -o test_ex$(EXE_EXT)
-	./test_ex$(EXE_EXT)
+# Compila os arquivos objeto
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+# Limpa os arquivos gerados
 clean:
-	$(RM) test_ex$(EXE_EXT
+	rm -rf $(BUILD_DIR) $(BIN)
+
+# Executa o programa
+run: $(BIN)
+	./$(BIN)
+
+.PHONY: all clean run

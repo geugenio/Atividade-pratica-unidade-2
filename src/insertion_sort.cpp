@@ -1,12 +1,9 @@
 #include "insertion_sort.h"
 #include "utils.h"
-
-
+using namespace std;
 
 void insertion_sort(vector<int>& arr) {
     int tamanho = arr.size();
-    Metricas::resetMetricas(); // Reseta as métricas de comparações e trocas
-    Metricas::startTimer(); // Inicia o cronômetro para medir o tempo de execução
     if (tamanho <= 1) {
         return; // Se o vetor tiver tamanho 0 ou 1, ele já está ordenado
     }
@@ -22,6 +19,10 @@ void insertion_sort(vector<int>& arr) {
             } else{
                 break; // Se o elemento atual não for maior que a chave, sai do loop
             }
+        }
+
+        if (j + 1 != i){
+            Metricas::trocas++; // Incrementa o contador de trocas (a inserção também conta como uma troca)
         }
         arr[j+1] = chave;
     }

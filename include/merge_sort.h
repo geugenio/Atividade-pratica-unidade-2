@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-using namespace std;
 
-void mescla(vector<int>& arr, int esq, int meio, int dir);
-void merge_sort(vector<int>& arr, int esq, int dir);
+void mescla(std::vector<int>& arr, int esq, int meio, int dir);
+void recursao_merge_sort(std::vector<int>& arr, int esq, int dir);
+void merge_sort(std::vector<int>& arr);
