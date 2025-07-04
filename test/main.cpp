@@ -6,7 +6,6 @@
 #include "locale"
 #include "iomanip"
 
-
 #include "bubble_sort.h"
 #include "insertion_sort.h"
 #include "merge_sort.h"
@@ -57,7 +56,7 @@ int main() {
         return 1;
     }
 
-    arquivo_csv << "Tipo_Dado,Tamanho_Array,Algoritmo,Tempo_ms,Tempo_s,Comparacoes,Trocas" << endl;
+    arquivo_csv << "Tipo_Dado,Tamanho_Array,Algoritmo,Tempo_ms,Tempo_s,Comparacoes,Trocas,Memoria_Auxiliar_Bytes" << endl;
 
     cout << "===============================================================" << endl;
     cout << "||     Análise comparativa de algorítmos de ordenação         ||" << endl;
@@ -93,6 +92,7 @@ int main() {
 
                 long long comparacoes = Metricas::getComparacoes();
                 long long trocas = Metricas::getTrocas();
+                long long memoria_auxiliar = Metricas::getMemoriaAuxiliarBytes();
 
                 //Verifica se o array está ordenado
                 if(!Metricas::isSorted(arr)){
@@ -103,7 +103,8 @@ int main() {
 
                     cout << "Tempo: " << fixed << setprecision(3) << tempoMs << " ms ("; // 3 casas decimais para ms
                     cout << fixed << setprecision(6) << tempoS << " segundos)" << endl; // 6 casas decimais para segundos
-                    Metricas::printMetricas(); // Imprime as métricas de comparações e trocas
+                    Metricas::printMetricas();
+                    cout << "Memoria Auxiliar: " << memoria_auxiliar << " bytes" <<endl;
                     cout << endl;
 
                     //escrevendo no arquivo csv
@@ -113,7 +114,8 @@ int main() {
                                 << fixed << setprecision(6) << tempoMs << ","
                                 << fixed << setprecision(6) << tempoS << ","
                                 << comparacoes << ","
-                                << trocas << endl;
+                                << trocas << ","
+                                << memoria_auxiliar << endl;
                 }
             }
         }

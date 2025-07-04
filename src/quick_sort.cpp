@@ -40,8 +40,12 @@ void recursao_quick_sort(vector<int>& arr, int low, int high) {
 
 void quick_sort(vector<int>& arr) {
     if (arr.size() <= 1){
+        Metricas::setMemoriaAuxiliarBytes(0);
         return;
     } else{
         recursao_quick_sort(arr, 0, arr.size() - 1);
+
+
+        Metricas::setMemoriaAuxiliarBytes(0);
     }
 }

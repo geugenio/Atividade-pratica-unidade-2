@@ -27,6 +27,9 @@ namespace Metricas{
     void printMetricas(); //Imprime as métricas de comparações e trocas
 
 
-    static long long getComparacoes();
-    static long long getTrocas();
+    long long getComparacoes();
+    long long getTrocas();
+    long long getMemoriaAuxiliarBytes();
+
+    void setMemoriaAuxiliarBytes(long long bytes);
 }

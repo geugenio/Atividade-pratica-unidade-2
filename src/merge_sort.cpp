@@ -60,5 +60,6 @@ void merge_sort(vector<int>& arr) {
         return; // Se o vetor tiver tamanho 0 ou 1, ele já está ordenado
     } else{
         recursao_merge_sort(arr, 0, arr.size() - 1); // Chama a função de merge_sort com os índices iniciais
+        Metricas::setMemoriaAuxiliarBytes(arr.size() * sizeof(int)); //Merge Sort usa O(N) de espaço extra p array temporario
     }
 }

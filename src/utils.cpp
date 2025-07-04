@@ -8,6 +8,7 @@ using namespace std;
 namespace Metricas{
     long long comparacoes = 0;
     long long trocas = 0;
+    long long memoria_auxiliar_bytes = 0;
     chrono::time_point<chrono::high_resolution_clock> startTime;
 
     void startTimer() {
@@ -23,6 +24,7 @@ namespace Metricas{
     void resetMetricas(){
         comparacoes = 0;
         trocas = 0;
+        memoria_auxiliar_bytes = 0;
     }
     void printArray(const vector<int>& arr){
         for (const auto& elem : arr) {
@@ -43,12 +45,19 @@ namespace Metricas{
         cout << "Trocas: " << trocas << endl;
     }
 
-    static long long Metricas::getComparacoes() {
+    long long getComparacoes() {
         return comparacoes;
     }
 
-    static long long Metricas::getTrocas() {
+    long long getTrocas() {
         return trocas;
+    }
+    long long getMemoriaAuxiliarBytes() {
+        return memoria_auxiliar_bytes;
+    }
+
+    void setMemoriaAuxiliarBytes(long long bytes) {
+        memoria_auxiliar_bytes = bytes;
     }
 }
 

@@ -5,6 +5,7 @@ using namespace std;
 void insertion_sort(vector<int>& arr) {
     int tamanho = arr.size();
     if (tamanho <= 1) {
+        Metricas::setMemoriaAuxiliarBytes(0);
         return; // Se o vetor tiver tamanho 0 ou 1, ele já está ordenado
     }
     for(int i = 1; i < tamanho; i++){
@@ -26,4 +27,5 @@ void insertion_sort(vector<int>& arr) {
         }
         arr[j+1] = chave;
     }
+     Metricas::setMemoriaAuxiliarBytes(0);
 }

@@ -7,6 +7,7 @@ void selection_sort(vector<int>& arr){
     int tamanho = arr.size(); //obtem o tamanho do vetor
 
     if (tamanho <=1 ){
+        Metricas::setMemoriaAuxiliarBytes(0);
         return; //Caso o vetor tenha tamanho 0 ou 1, ele já estará ordenado
     }
 
@@ -28,4 +29,6 @@ void selection_sort(vector<int>& arr){
             Metricas::trocas++; // Incrementa o contador de trocas
         }
     }
+
+    Metricas::setMemoriaAuxiliarBytes(0);
 }

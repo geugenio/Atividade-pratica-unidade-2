@@ -6,6 +6,11 @@ using namespace std;
 void bubble_sort(vector<int>& arr) {
     int n = arr.size();
 
+    if (n<=1){
+        Metricas::setMemoriaAuxiliarBytes(0);
+        return;
+    }
+
     for (int i = 0; i < n-1; i++){
         bool trocas = false;
 
@@ -25,4 +30,7 @@ void bubble_sort(vector<int>& arr) {
             break;
         }
     }
+    //Bubble sort é um algoritmo inplace, usando só um num constante de variaveis extras, ou seja
+    //seu espaço auxiliar é O(1), que representamos aqui com 0 bytes.
+    Metricas::setMemoriaAuxiliarBytes(0);
 }
